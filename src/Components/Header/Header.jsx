@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {MenMenu} from "../../index"
+import {KidMenu, MenMenu,WomenMenu,ProfileMenu} from "../../index"
 
 import { 
   BellIcon, 
@@ -9,16 +9,18 @@ import {
   HeartIcon,
   ShoppingBagIcon
 } from '@heroicons/react/24/outline'; // Using Heroicons for icons; install via npm i @heroicons/react
-import WomenMenu from '../sub-components/WomenMenu';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navItems = [
-    { slug: '/',  name: 'Home' , color:'hover:border-yellow-400' , },
-    { slug: '/',  name: 'Login' ,color:'hover:border-red-400'},
-    { slug: '/',  name: 'SignUp',color:'hover:border-blue-400', },
-    { slug: '/',  name: 'Add Post',color:'hover:border-green-400', },
-    { slug: '/', name: 'All Post',color:'hover:border-yellow-400', }
+    { slug: '/',  name: 'MEN' , color:'hover:border-yellow-400' , menu:MenMenu},
+    { slug: '/',  name: 'WOMEN' ,color:'hover:border-red-400',menu:WomenMenu},
+    { slug: '/',  name: 'KID',color:'hover:border-blue-400',menu:KidMenu },
+    { slug: '/',  name: 'HOME',color:'hover:border-green-400',menu:KidMenu },
+    { slug: '/',  name: 'BEAUTY',color:'hover:border-green-400',menu:KidMenu },
+    { slug: '/',  name: 'GENZ',color:'hover:border-green-400',menu:KidMenu },
+    
   ];
 
   return (
@@ -31,18 +33,19 @@ const Header = () => {
 
         {/* Left Navigation Menu */}
         <nav className="relative hidden md:flex space-x-1 lg:space-x-2 ml-8">
-          {navItems.map((item)=>(
-            <div key={item.color} className='group'>
-            <a href={item.slug} className={`px-3  border-b-4 border-transparent ${item.color} transition-all duration-200 pb-7 text-sm font-semibold text-gray-700  transition-colors font-bold`}>{item.name} </a>
-            
-            <MenMenu/>
-
-          </div>
-          ))}
+          {navItems.map((item)=>{
+            const Menu = item.menu;
+            return (
+              <div key={item.color} className='group'>
+              <a href={item.slug} className={`px-3  border-b-4 border-transparent ${item.color} transition-all duration-200 pb-7 text-sm font-semibold text-gray-700  transition-colors font-bold`}>{item.name} </a>
+              <Menu/>
+              </div>
+            )
+          })}
           
           <div className='group'>
              <a href="#" className="px-3 pb-10  text-sm font-semibold text-gray-700  transition-colors font-bold pr-0">STUDIO<sup><span className='p-1 text-red-500'><b>NEW</b></span></sup></a>
-             <WomenMenu/>
+             <MenMenu/>
           </div>
         </nav>
 
@@ -59,7 +62,7 @@ const Header = () => {
         </div>
 
         {/* Right Icons */}
-        <div className="flex items-center space-x-2 lg:space-x-3">
+        <div className="relative flex items-center space-x-2 lg:space-x-3">
           
           <button className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200 relative">
             <HeartIcon className="w-5 h-5 lg:w-6 lg:h-6" />
@@ -69,8 +72,9 @@ const Header = () => {
             <ShoppingBagIcon className="w-5 h-5 lg:w-6 lg:h-6" />
             <span className="absolute -top-1 -right-1 block w-3 h-3 bg-red-500 rounded-full ring-2 ring-white text-xs text-white font-bold flex items-center justify-center">3</span>
           </button>
-          <button className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200">
+          <button className="group cursor-pointer p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200">
             <UserCircleIcon className="w-6 h-6 lg:w-7 lg:h-7" />
+            <ProfileMenu/>
           </button>
           {/* Mobile menu button */}
           <button

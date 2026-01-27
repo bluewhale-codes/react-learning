@@ -2,7 +2,7 @@ export default function MenMenu() {
   return (
     <div
       className="
-        w-230
+        w-230 mt-8
         absolute left-0 right-0 top-full z-50
         bg-white shadow-xl
         transition-all duration-300 ease-in-out
