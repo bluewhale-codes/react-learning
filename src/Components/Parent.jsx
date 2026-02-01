@@ -1,22 +1,15 @@
-import React, { useState, useCallback } from "react";
 
-const Child = React.memo(({ onClick }) => {
-  console.log("Child rendered");
-  return <button onClick={onClick}>Click Child</button>;
-});
+import { useContext } from "react";
+import {UseContext} from "../ContextAPI/context";
 
 function Parent() {
-  const [count, setCount] = useState(0);
-
-  const handleClick =() => {
-    console.log("Child button clicked");
-  }
-
+ 
+  const {user,setUser} = useContext(UseContext);
+ 
   return (
     <>
-      <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-      <Child onClick={handleClick} />
+        <h1>{user}</h1>
+        <input type="text" onChange={(e)=>setUser(e.target.value)}/>
     </>
   );
 }
